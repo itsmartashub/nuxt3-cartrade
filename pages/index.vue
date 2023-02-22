@@ -1,7 +1,5 @@
 <script setup>
-	useHead({
-		title: 'CarTreader',
-	})
+	useHead({ title: 'CarTreader' })
 </script>
 
 <template>
