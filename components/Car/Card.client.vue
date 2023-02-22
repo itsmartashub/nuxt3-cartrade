@@ -1,20 +1,22 @@
 <script setup>
-	import heartFilled from '@/assets/heartFilled.png'
-	import heartOutline from '@/assets/heartOutline.png'
+import heartFilled from '@/assets/heartFilled.png'
+import heartOutline from '@/assets/heartOutline.png'
 
-	const props = defineProps({
-		car: Object,
-		favored: Boolean,
-	})
+const props = defineProps({
+	car: Object,
+	favored: Boolean,
+})
 
-	/* 
-        mozemo koristiti i ref() i reactive(), ali u nuxt 3 je najbolje koristiti useState composable jer je ssr-friendly. useState() za parametre ima unikatan key, i za drugi parametar ima f-ju koja vraca inicijalnu vrednost
-    */
-	// const favored = useState(`favored-${props.car.id}`, () => {
-	// 	return false
-	// })
+/* 
+	mozemo koristiti i ref() i reactive(), ali u nuxt 3 je najbolje koristiti useState composable jer je ssr-friendly. useState() za parametre ima unikatan key, i za drugi parametar ima f-ju koja vraca inicijalnu vrednost
+*/
+/*
+const favored = useState(`favored-${props.car.id}`, () => {
+	return false
+})
+*/
 
-	const emit = defineEmits(['favor'])
+const emit = defineEmits(['favor'])
 </script>
 
 <template>
@@ -34,11 +36,7 @@
 			<!-- 
                 //! Koristimo <NuxtImg/> umesto <img/>, jer smo instalirali @nuxt/image-edge nuxt module
              -->
-			<NuxtImg
-				:src="car.url"
-				alt=""
-				class="w-[300px] h-full"
-			/>
+			<NuxtImg :src="car.url" alt="" class="w-[300px] h-full" />
 			<div class="p-4 flex flex-col">
 				<div>
 					<h1 class="text-2xl text-blue-700">{{ car.name }}</h1>
