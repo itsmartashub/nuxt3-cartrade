@@ -1,0 +1,40 @@
+
+### userId GET
+GET http://localhost:3000/api/car/listings/user/aa96ece8-1e54-4e38-b637-a636fc5e378e
+
+### car id GET
+GET http://localhost:3000/api/car/1
+
+### listings POST
+POST http://localhost:3000/api/car/listings/
+Content-Type: application/json
+  
+{"year": 2021,
+  "name": "Rolls Royce Ghost",
+  "make": "Rolls-Royce",
+  "model": "Ghost",
+  "miles": 53666,
+  "price": 455000,
+  "numberOfSeats": 5,
+  "city": "Toronto",
+  "features": ["No Accidents", "Low KM", "Vehicle Detailed", "Leather Interior"],
+  "image": "https://robbreport.com/wp-content/uploads/2021/03/1-5.jpg?w=1000",
+  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis odio et laboriosam! Numquam ut rem, blanditiis est rerum tenetur maxime delectus",
+  "listerId": "111"}
+
+### api/car/listings/[listingId].delete.js
+DELETE http://localhost:3000/api/car/listings/1
+
+###
+POST http://localhost:3000/api/car/listings/1/message
+Content-Type: application/json
+
+{
+  "message": "Zdravo, mnogo volim ovaj auto i zelim da ga kupim.",
+  "phone": "1112223333",
+  "email": "marija.magda@test.com",
+  "name": "Marija Magdalena"
+}
+
+### api/cars/[city].js
+GET http://localhost:3000/api/cars/toronto?make=Chrysler&minPrice=40000&maxPrice=790000

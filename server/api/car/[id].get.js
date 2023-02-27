@@ -1,13 +1,22 @@
-import cars from '@/data/cars.json'
+// import cars from '@/data/cars.json'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export default defineEventHandler(event => {
 	// extractujemo ID iz params, i onda matchujemo taj id sa onim iz cars niza
 
 	const { id } = event.context.params
 
-	const car = cars.find(car => car.id === parseInt(id))
+	//? data/cars.json VERSION
+	// const car = cars.find(car => car.id === parseInt(id))
 
-	console.log(id, car)
+	//? PRISMA VERSION
+	const car = prisma.car.findUnique({
+		where: {
+			id: parseInt(id),
+		},
+	})
 
 	if (!car) {
 		throw createError({

@@ -36,7 +36,7 @@ const emit = defineEmits(['favor'])
 			<!-- 
                 //! Koristimo <NuxtImg/> umesto <img/>, jer smo instalirali @nuxt/image-edge nuxt module
              -->
-			<NuxtImg :src="car.url" alt="" class="w-[300px] h-full" />
+			<NuxtImg :src="car.image" alt="" class="w-[300px] h-full" />
 			<div class="p-4 flex flex-col">
 				<div>
 					<h1 class="text-2xl text-blue-700">{{ car.name }}</h1>

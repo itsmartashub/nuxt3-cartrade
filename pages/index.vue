@@ -1,5 +1,7 @@
 <script setup>
-	useHead({ title: 'CarTreader' })
+useHead({ title: 'CarTreader' })
+// const { SUPABASE_KEY, SUPABASE_URL } = useRuntimeConfig()
+// console.log(SUPABASE_URL)
 </script>
 
 <template>
