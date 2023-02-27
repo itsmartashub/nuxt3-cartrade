@@ -7,6 +7,7 @@ definePageMeta({
 
 const { makes } = useCars()
 const user = useSupabaseUser()
+const supabase = useSupabaseClient()
 
 const info = useState('adInfo', () => {
 	return {
@@ -19,7 +20,7 @@ const info = useState('adInfo', () => {
 		seats: '',
 		features: '',
 		description: '',
-		image: 'dsadasda',
+		image: null,
 	}
 })
 const errorMessage = ref('')
@@ -82,6 +83,13 @@ const isButtonDisabled = computed(() => {
 
 const handleSubmit = async () => {
 	/* http POST req. Dakle ne mozemo da koristimo useFetch() composable jer on radi samo sa GET req. Tako da cemo za POST req koristiti $fetch(). Ali prvo idemo da extractujemo body */
+	const fileName = Math.floor(Math.random() * 10000000000000000)
+	const { data, error } = await supabase.storage
+		.from('images')
+		.upload('public/' + fileName, info.value.image)
+
+	if (error) return (errorMessage.value = "Can't Upload Image")
+
 	const body = {
 		...info.value,
 		city: info.value.city.toLowerCase(),
@@ -92,7 +100,7 @@ const handleSubmit = async () => {
 		year: parseInt(info.value.year),
 		name: `${info.value.make} ${info.value.model}`,
 		listerId: user.value.id,
-		image: 'dsadsaads',
+		image: data.path, //? path je vrednost koji je vratila funkciju upload(), i to je url path za nasu sliku
 	}
 
 	delete body.seats
@@ -105,6 +113,7 @@ const handleSubmit = async () => {
 		navigateTo('/profile/listings')
 	} catch (error) {
 		errorMessage.value = error.statusMessage
+		await supabase.storage.from('images').remove(data.path)
 	}
 }
 </script>

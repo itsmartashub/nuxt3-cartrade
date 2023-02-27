@@ -17,6 +17,7 @@ const favored = useState(`favored-${props.car.id}`, () => {
 */
 
 const emit = defineEmits(['favor'])
+const config = useRuntimeConfig()
 </script>
 
 <template>
@@ -36,7 +37,11 @@ const emit = defineEmits(['favor'])
 			<!-- 
                 //! Koristimo <NuxtImg/> umesto <img/>, jer smo instalirali @nuxt/image-edge nuxt module
              -->
-			<NuxtImg :src="car.image" alt="" class="w-[300px] h-full" />
+			<NuxtImg
+				:src="`${config.public.supabase.url}/storage/v1/object/public/images/${car.image}`"
+				alt=""
+				class="w-[300px] h-full"
+			/>
 			<div class="p-4 flex flex-col">
 				<div>
 					<h1 class="text-2xl text-blue-700">{{ car.name }}</h1>
